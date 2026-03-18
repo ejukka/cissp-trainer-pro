@@ -14,7 +14,6 @@ import {
   X,
   ChevronLeft,
   ChevronRight,
-  BookOpen,
   BarChart3,
   PlayCircle,
   Flag,

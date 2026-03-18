@@ -13,7 +13,6 @@ import {
   Timer,
   ChevronRight,
   ChevronLeft,
-  RotateCcw,
   Trash2,
   AlertTriangle,
 } from 'lucide-react'

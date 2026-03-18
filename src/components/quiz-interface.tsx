@@ -122,7 +122,6 @@ export function QuizInterface({ onExit }: QuizInterfaceProps) {
   useEffect(() => {
     if (isQuizComplete) {
       if (timerRef.current) clearInterval(timerRef.current)
-      const correctCount = Object.values(results).filter((r) => r.correct).length + (isCorrect ? 0 : 0)
       const sessionSeconds = Math.round((Date.now() - sessionStartRef.current) / 1000)
       addStudyTime(Math.round(sessionSeconds / 60))
       addSession({

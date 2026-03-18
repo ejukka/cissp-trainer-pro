@@ -4,12 +4,12 @@ import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, Legend, ReferenceLine,
+  PieChart, Pie, Cell, ReferenceLine,
 } from 'recharts'
 import {
   Shield, Database, Tag, AlertTriangle, CheckCircle, Info,
   ChevronDown, ChevronUp, Search, Filter, BookOpen, Clock, Zap, Trophy,
-  BarChart2, PieChart as PieChartIcon,
+  BarChart2,
 } from 'lucide-react'
 import { Navigation } from '@/components/navigation'
 import { questions } from '@/data/questions'
@@ -182,8 +182,10 @@ export default function AdminPage() {
                   <YAxis type="category" dataKey="name" width={145} tick={{ fill: '#a1a1aa', fontSize: 11 }} tickLine={false} axisLine={false} />
                   <Tooltip
                     {...TOOLTIP_STYLE}
-                    formatter={(value: number, _: string, entry: { payload: typeof domainData[0] }) => [
-                      `${value} questions (E:${entry.payload.easy} M:${entry.payload.medium} H:${entry.payload.hard})`,
+                    formatter={(value: number, _: string, entry: { payload?: typeof domainData[0] }) => [
+                      entry.payload
+                        ? `${value} questions (E:${entry.payload.easy} M:${entry.payload.medium} H:${entry.payload.hard})`
+                        : `${value} questions`,
                       'Count',
                     ]}
                   />
@@ -328,11 +330,12 @@ export default function AdminPage() {
                   body: 'One question has 5 answer choices while all others have 4. Standardising to 4 choices improves consistency and matches CISSP exam format.',
                 },
               ].map((gap) => {
-                const colors = {
+                const colorMap = {
                   red: { bg: 'bg-red-500/10', border: 'border-red-500/20', icon: 'text-red-400', title: 'text-red-300' },
                   yellow: { bg: 'bg-yellow-500/10', border: 'border-yellow-500/20', icon: 'text-yellow-400', title: 'text-yellow-300' },
                   blue: { bg: 'bg-blue-500/10', border: 'border-blue-500/20', icon: 'text-blue-400', title: 'text-blue-300' },
-                }[gap.severity]
+                }
+                const colors = colorMap[gap.severity as keyof typeof colorMap] ?? colorMap.blue
 
                 return (
                   <div key={gap.title} className={`${colors.bg} border ${colors.border} rounded-xl p-4`}>

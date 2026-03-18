@@ -14,7 +14,6 @@ import {
   Activity,
   Code,
   ChevronDown,
-  ChevronRight,
   BookOpen,
   Target,
   CheckCircle2,
