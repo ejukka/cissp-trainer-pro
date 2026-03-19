@@ -1,9 +1,9 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { Providers } from '@/components/providers'
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
 })
@@ -13,17 +13,28 @@ const jetbrainsMono = JetBrains_Mono({
   variable: '--font-mono',
 })
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: 'cover',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#09090b' },
+  ],
+}
+
 export const metadata: Metadata = {
   title: 'CISSP Trainer Pro - Professional Certification Preparation',
   description: 'Master the CISSP certification with our professional training platform. Interactive quizzes, study plans, progress tracking, and comprehensive domain coverage.',
   keywords: 'CISSP, certification, cybersecurity, security training, ISC2, exam preparation',
   authors: [{ name: 'CISSP Trainer Pro' }],
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-    { media: '(prefers-color-scheme: dark)', color: '#09090b' },
-  ],
   manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: 'CISSP Pro',
+  },
   icons: {
     icon: [
       { url: '/favicon.ico' },
@@ -31,7 +42,7 @@ export const metadata: Metadata = {
       { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
     ],
     apple: [
-      { url: '/apple-icon.png' },
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
     ],
   },
   openGraph: {
